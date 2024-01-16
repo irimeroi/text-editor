@@ -1,0 +1,9 @@
+{
+  "name": "Just Another Text Editor",
+  "short_name": "J.A.T.E.",
+  "orientation": "portrait",
+  "display": "standalone",
+  "start_url": ".",
+  "description": "just another text editor",
+  "background_color": "#ffffff"
+}

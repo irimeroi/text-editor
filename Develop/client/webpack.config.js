@@ -20,20 +20,34 @@ module.exports = () => {
     plugins: [
       new HtmlWebpackPlugin({
         template: './index.html',
-        title: 'Webpack Plugin',
+        title: 'J.A.T.E.',
       }),
-      new MiniCssExtractPlugin(),
       new InjectManifest({
-        swSrc: './src/sw.js',
+        swSrc: './src-sw.js',
         swDest: 'service-worker.js',
       }),
+      new WebpackPwaManifest({
+      name: 'Just Another Text Editor',
+      short_name: 'J.A.T.E.',
+      description: 'just another text editor',
+      background_color: '#ffffff',
+      fingerprints: false,
+      publicPath: '.',
+      // icons: [
+      //   {
+      //     src: path.resolve('src/images/logo.png'),
+      //     sizes: [96, 128, 192, 256, 384, 512], // multiple sizes
+      //     destination: path.join('assets', 'icons'),
+      //   }
+      // ]
+    }),
     ],
 
     module: {
       rules: [
         {
           test: /\.css$/i,
-          use: [MiniCssExtractPlugin.loader, 'css-loader'],
+          use: ['style-loader', 'css-loader'],
         },
         {
           test: /\.(png|svg|jpg|jpeg|gif)$/i,
@@ -46,6 +60,7 @@ module.exports = () => {
             loader: 'babel-loader',
             options: {
               presets: ['@babel/preset-env'],
+              plugins: ['@babel/plugin-proposal-object-rest-spread', '@babel/transform-runtime'],
             },
           },
         },
