@@ -12,9 +12,9 @@ module.exports = () => {
     entry: {
       main: './src/js/index.js',
       install: './src/js/install.js',
-      database: './src/js/database.js',
-      editor: './src/js/editor.js',
-      header: './src/js/header.js'
+      // database: './src/js/database.js',
+      // editor: './src/js/editor.js',
+      // header: './src/js/header.js'
     },
     output: {
       filename: '[name].bundle.js',
@@ -30,20 +30,23 @@ module.exports = () => {
         swDest: 'src-sw.js',
       }),
       new WebpackPwaManifest({
-      name: 'Just Another Text Editor',
-      short_name: 'J.A.T.E.',
-      description: 'just another text editor',
-      background_color: '#ffffff',
-      fingerprints: false,
-      publicPath: '.',
-      // icons: [
-      //   {
-      //     src: path.resolve('src/images/logo.png'),
-      //     sizes: [96, 128, 192, 256, 384, 512], // multiple sizes
-      //     destination: path.join('assets', 'icons'),
-      //   }
-      // ]
-    }),
+        name: 'Just Another Text Editor',
+        short_name: 'J.A.T.E.',
+        description: 'just another text editor',
+        background_color: '#ffffff',
+        //theme color
+        fingerprints: false,
+        publicPath: '/',
+        inject: true,
+        start_url: '/',
+        icons: [
+          {
+            src: path.resolve('src/images/logo.png'),
+            sizes: [96, 128, 192, 256, 384, 512], // multiple sizes
+            destination: path.join('assets', 'icons'),
+          }
+        ]
+      }),
     ],
 
     module: {
@@ -52,13 +55,13 @@ module.exports = () => {
           test: /\.css$/i,
           use: ['style-loader', 'css-loader'],
         },
-        {
-          test: /\.(png|svg|jpg|jpeg|gif)$/i,
-          type: 'asset/resource',
-        },
+        // {
+        //   test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        //   type: 'asset/resource',
+        // },
         {
           test: /\.m?js$/,
-          exclude: /(node_modules|bower_components)/,
+          exclude: /node_modules/,
           use: {
             loader: 'babel-loader',
             options: {
